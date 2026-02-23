@@ -12,7 +12,7 @@ In Tutorial 2, we implemented functions that worked with transaction dictionarie
 - **Maintainability**: Easier to modify and extend
 - **Flexibility**: No longer restricted to predefined transaction types
 
-### Step 1: Check Out the tut-3 Branch
+### Step 1: Check Out the tut-3 Branch ✔
 
 First, ensure you're working on the `tut-3` branch:
 ```bash
@@ -33,16 +33,16 @@ The file contains both the old implementation (for reference) and the skeleton f
 
 Remove all the deprecated code by deleting the following marked sections:
 
-1. **Remove** the `TRANSACTION_TYPES` constant (around line 7)
-2. **Remove** the `add_transaction()` function (marked with TODO)
-3. **Remove** the `get_income_total()` function (marked with TODO)
-4. **Remove** the `get_expense_total()` function (marked with TODO)
-5. **Remove** the `display_transactions()` function (marked with TODO)
-6. **Remove** the `if __name__ == "__main__":` block at the end (marked with TODO)
+1. **Remove** the `TRANSACTION_TYPES` constant (around line 7) ✔
+2. **Remove** the `add_transaction()` function (marked with TODO) ✔
+3. **Remove** the `get_income_total()` function (marked with TODO) ✔
+4. **Remove** the `get_expense_total()` function (marked with TODO) ✔
+5. **Remove** the `display_transactions()` function (marked with TODO) ✔
+6. **Remove** the `if __name__ == "__main__":` block at the end (marked with TODO) ✔
 
 **Tip**: Look for comments that say `#TODO Remove` or `#TODO: Remove` to identify what should be deleted.
 
-### Step 4: Update the calculate_balance Function
+### Step 4: Update the calculate_balance Function ✔
 
 The `calculate_balance()` function needs to be updated to work with `Transaction` objects instead of dictionaries:
 
@@ -52,7 +52,7 @@ The `calculate_balance()` function needs to be updated to work with `Transaction
 
 **Hint**: With the new Transaction class, expenses have negative amounts and income has positive amounts, so you can simply sum all amounts!
 
-### Step 5: Implement the TODO Functions
+### Step 5: Implement the TODO Functions ✔
 
 Now implement the remaining functions marked with `# TODO`:
 
@@ -61,7 +61,7 @@ Now implement the remaining functions marked with `# TODO`:
 
 **Note**: The `format_currency()` function is already implemented—no changes needed.
 
-### Step 6: Format Your Code
+### Step 6: Format Your Code ✔ ***
 
 Once you've made all changes, format your code using a Python formatter. In the terminal, run:
 
@@ -76,7 +76,7 @@ pip install black
 
 This ensures your code follows PEP 8 style guidelines and looks professional.
 
-### Step 7: Delete the Old Test File
+### Step 7: Delete the Old Test File ✔
 
 The old test file `test_transactions.py` was designed for the dictionary-based implementation. Delete it:
 
@@ -84,7 +84,7 @@ The old test file `test_transactions.py` was designed for the dictionary-based i
 2. Right-click the file and select "Delete"
 3. Confirm the deletion
 
-### Step 8: Run the New Tests
+### Step 8: Run the New Tests ✔
 
 Now run the new test file designed for the Transaction class:
 
@@ -94,7 +94,7 @@ pytest tests/test_transaction_class.py
 
 This will test your new implementation. All tests should pass if you've implemented everything correctly.
 
-### Step 9: Debug and Fix Issues
+### Step 9: Debug and Fix Issues ✔
 
 If any tests fail:
 1. Read the error message carefully
@@ -102,7 +102,7 @@ If any tests fail:
 3. Verify that expenses are negative and income is positive
 4. Make corrections and run tests again
 
-### Step 10: Commit Your Work
+### Step 10: Commit Your Work ✔
 
 Once all tests pass, commit your refactored code:
 
