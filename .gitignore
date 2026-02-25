@@ -1,9 +1,9 @@
-# Python
+# Python (Don't track virtual environments, bytecode, or cache) (.env contains sensitive info)
 __pycache__/
 *.py[cod]
 .venv/
 env/
-.env
+.env 
 
 # Data & DB
 *.db

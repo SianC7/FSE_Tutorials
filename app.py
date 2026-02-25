@@ -8,7 +8,7 @@ def main():
     transactions = [
         Transaction(description="Salary", amount=Decimal("5000"), category="income", date=datetime.now()),
         Transaction(description="Freelance Project", amount=Decimal("1500"), category="income", date=datetime.now()),
-        # Transaction(description="Gift", amount=Decimal("-2000"), category="expense", date=datetime.now()),
+        Transaction(description="Gift", amount=Decimal("-2000"), category="expense", date=datetime.now()),
     ]
     # Uh oh! Something is going wrong... The line below this is causing an error. We should investigate.
     summary = calculate_financial_summary(transactions)

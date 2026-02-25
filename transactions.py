@@ -10,7 +10,7 @@ class Transaction:
         self.date = date
         self.description = description
         try:
-            self.amount = Decimal(amount)
+            self.amount = Decimal(amount) # try set amount to be a decimal type. If a person passes in a string that cannot be converted to a decimal, it will raise an InvalidOperation error, which we catch and raise a ValueError with a more user-friendly message.
         except InvalidOperation:
             raise ValueError(f"Invalid amount: {amount}")
         self.category = category
@@ -56,13 +56,21 @@ def check_financial_health(transactions: list[Transaction]) -> str:
         str: A message indicating financial health status, like: "Saving well", or "Overspending".
 
     """
+
     total_income = calculate_total_income(transactions)
-    total_expenses = abs(calculate_total_expenses(transactions))
-    health = total_income / (total_expenses)
-    if (health >= 1):
-        return "Saving well"
-    else:
-        return "Overspending"
+    total_expenses = abs(calculate_total_expenses(transactions)) 
+    
+    try:
+        health = total_income / (total_expenses)
+        if (health >= 1):
+            return "Saving well"
+        else:
+            return "Overspending"
+    except (ZeroDivisionError, InvalidOperation):
+        if total_income > 0:
+            return "Saving well"
+        
+        return "No transactions recorded."
 
 #TODO Examine this function, it seems to be causing an error in app.py? (Hint: This function uses other functions defined above, it might be related to them)
 def calculate_financial_summary(transactions: list[Transaction]) -> dict:

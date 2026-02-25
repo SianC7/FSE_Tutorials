@@ -12,7 +12,7 @@ In this tutorial, you will learn how to work with environment variables, debug r
 - Write unit tests for different transaction scenarios
 - Understand how pytest works and how to test functions
 
-### Step 1: Check Out the tut-4 Branch
+### Step 1: Check Out the tut-4 Branch ✓
 
 First, ensure you're working on the `tut-4` branch:
 ```bash
@@ -32,7 +32,7 @@ In our project, we use environment variables to store:
 - `SECRET_KEY`: A secret key for security features
 - `CURRENCY_SYMBOL`: The currency symbol to display (e.g., "R" for Rand)
 
-### Step 3: Create Your .env File
+### Step 3: Create Your .env File ✓
 
 1. In the root directory of the project, you'll find a `.env.example` file
 2. Create a new file named `.env` in the same directory
@@ -45,7 +45,7 @@ CURRENCY_SYMBOL=R
 
 **Important**: The `.env` file should never be committed to git (it's already in `.gitignore`). The `.env.example` file shows what variables are needed without exposing actual secrets.
 
-### Step 4: Load Environment Variables in config.py
+### Step 4: Load Environment Variables in config.py ✓
 
 Open the `config.py` file. You'll see it currently has hardcoded values:
 
@@ -68,7 +68,7 @@ class Config:
 - The second parameter (`"default_secret"`) is the default value if the variable isn't found
 - The `load_dotenv()` at the top of the file loads variables from `.env`
 
-### Step 5: Test the Configuration
+### Step 5: Test the Configuration ✓
 
 Run the configuration tests to verify your environment variables are loaded correctly:
 
@@ -90,7 +90,7 @@ python app.py
 
 **Uh oh!** You should see an error. This is intentional—let's learn how to debug it!
 
-### Step 7: Investigate the Error
+### Step 7: Investigate the Error ✓
 
 The error message will show something like `ZeroDivisionError: division by zero`. Let's trace it:
 
@@ -108,7 +108,7 @@ health = total_income / (total_expenses)
 
 **The Problem**: In `app.py`, the sample transactions only have income, no expenses! So `total_expenses` is zero, causing a division by zero error.
 
-### Step 8: Understanding the Logic
+### Step 8: Understanding the Logic ✓
 
 The `check_financial_health()` function evaluates financial health by dividing income by expenses. But what happens when:
 - There are no expenses? (division by zero)
@@ -117,7 +117,7 @@ The `check_financial_health()` function evaluates financial health by dividing i
 
 We need to handle these edge cases!
 
-### Step 9: Fix the Error with Try-Except
+### Step 9: Fix the Error with Try-Except ✓
 
 Add a try-except block to handle the division by zero error. Update the `check_financial_health()` function:
 
@@ -146,7 +146,7 @@ def check_financial_health(transactions: list[Transaction]) -> str:
 - If a `ZeroDivisionError` occurs, the `except` block handles it
 - We return meaningful messages based on whether there's income
 
-### Step 10: Test the Fix
+### Step 10: Test the Fix ✓
 
 Now run the application again:
 ```bash
@@ -155,7 +155,7 @@ python app.py
 
 It should work! You'll see a financial summary with "No expenses recorded" as the health status.
 
-### Step 11: Uncomment the Expense Transaction
+### Step 11: Uncomment the Expense Transaction ✓
 
 In `app.py`, uncomment line 11 to add an expense transaction:
 ```python
