@@ -44,7 +44,6 @@ def calculate_total_expenses(transactions: List[Transaction]) -> Decimal:
 
     return Decimal(expenses)
 
-
 # TODO: Implement this function to sum all transactions with positive amounts ✔
 def calculate_total_income(transactions: List[Transaction]) -> Decimal:
     """Calculates the total income from a list of transactions.
