@@ -12,13 +12,13 @@ In this tutorial, you will move from in-memory objects to working with a relatio
 - Run and extend the provided database helpers in `app.py`
 - Validate your work with automated tests
 
-### Step 1: Check Out the tut-5 Branch
+### Step 1: Check Out the tut-5 Branch ✔
 
 ```bash
-git checkout tut-5
+git checkout tut-5 
 ```
 
-### Step 2: Refresh ORM Concepts
+### Step 2: Refresh ORM Concepts ✔
 
 An **Object-Relational Mapper (ORM)** lets you work with database rows as Python objects instead of raw SQL. In this project:
 - `Category` ↔ `categories` table
@@ -26,7 +26,7 @@ An **Object-Relational Mapper (ORM)** lets you work with database rows as Python
 
 Open `transactions.py` and skim the models to see how columns and relationships are declared. You do **not** need to change these models for this tutorial.
 
-### Step 3: Configure the Database URL
+### Step 3: Configure the Database URL ✔
 
 `config.py` exposes `Config.get_database_url()`. By default it uses SQLite:
 

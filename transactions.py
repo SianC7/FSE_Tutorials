@@ -1,5 +1,5 @@
 from decimal import Decimal, InvalidOperation
-from sqlalchemy import Column, ForeignKey, Integer, Numeric, String
+from sqlalchemy import Column, ForeignKey, Integer, Numeric, String # SQLAlchemy imports for defining database models and relationships
 from sqlalchemy.orm import declarative_base, relationship
 
 from config import Config
@@ -23,25 +23,26 @@ class Category(Base):
         return f"Category(id={self.id}, name='{self.name}')"
 
 
-class Transaction(Base):
-    __tablename__ = "transactions"
+class Transaction(Base): # Database table called transactions, each instance of this class represents a row in that table
+    __tablename__ = "transactions" # Name of the table in the database
 
+    # Mapping of class attributes to database columns
     id = Column(Integer, primary_key=True)
     date = Column(String(32), nullable=False)
     description = Column(String(255), nullable=False)
     amount = Column(Numeric(12, 2), nullable=False)
-    category_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
-    category_ref = relationship("Category", back_populates="transactions")
+    category_id = Column(Integer, ForeignKey("categories.id"), nullable=True) # Foreign key to link to the Category table, can be null if the transaction is uncategorized
+    category_ref = relationship("Category", back_populates="transactions") # Establishes a relationship to the Category class, allowing us to access the category of a transaction through the category_ref attribute. The back_populates parameter indicates that the Category class has a corresponding relationship called transactions, which allows us to access all transactions associated with a category.
 
-    def __init__(self, **kwargs):
-        if "amount" in kwargs:
+    def __init__(self, **kwargs): # Custom initializer to ensure amount is always a Decimal
+        if "amount" in kwargs: # if amount is provided, try to convert it to Decimal, if it fails raise a ValueError with a clear message
             try:
                 kwargs["amount"] = Decimal(kwargs["amount"])
             except (InvalidOperation, ValueError) as e:
                 raise ValueError("Amount must be a valid decimal number") from e
         super().__init__(**kwargs)
 
-    def __repr__(self):
+    def __repr__(self): # What is printed when we print a transaction object
         amt = Decimal(str(self.amount)) if self.amount is not None else Decimal("0.00")
         return (
             "Transaction("
@@ -56,7 +57,7 @@ def format_currency(amount: Decimal) -> str:
     return f"{CURRENCY_SYMBOL} {amount:.2f}"
 
 
-def calculate_total_expenses(transactions: list[Transaction]) -> Decimal:
+def calculate_total_expenses(transactions: list[Transaction]) -> Decimal: # Function to calculate total expenses from a list of transactions that are instances of the Transaction class
     """Calculates the total expenses from a list of transactions."""
     return sum(
         (Decimal(str(t.amount)) for t in transactions if Decimal(str(t.amount)) < 0),
