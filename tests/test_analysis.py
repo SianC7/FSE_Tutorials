@@ -84,7 +84,7 @@ def test_generate_text_report_logic(db_session, rich_sample_data):
     assert report["Essential Coverage"] == "Healthy"
 
     # Net Savings = 20000 - 6200 = 13800
-    assert "R 13800.00" in report["Net Savings"]
+    assert "R 13,800.00" in report["Net Savings"]
 
 
 def test_generate_text_report_empty_db(db_session):
