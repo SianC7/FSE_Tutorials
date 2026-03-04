@@ -11,14 +11,14 @@ In this tutorial, we transition from simple data persistence to **Data Analysis*
 
 ---
 
-### Step 1: Check Out the tut-6 Branch
+### Step 1: Check Out the tut-6 Branch ✓
 
 ```bash
 git checkout tut-6
 
 ```
 
-### Step 2: Navigate the New Project Structure
+### Step 2: Navigate the New Project Structure ✓
 
 We have moved away from a flat file structure. Your project now looks like this:
 
