@@ -121,7 +121,7 @@ jobs:
 **Your Task**: The workflow file is already created, but let's understand what you would do:
 
 1. Create the directory structure: `.github/workflows/`
-2. Create a file called `tests.yml` inside it.
+2. Create a file called `test.yml` inside it.
 3. Copy the workflow configuration provided in the lesson or from the existing file.
 
 **Why YAML?** It's a human-readable format perfect for configuration files. Indentation matters (like Python), and it uses key-value pairs.
