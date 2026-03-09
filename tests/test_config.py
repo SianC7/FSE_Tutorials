@@ -1,4 +1,5 @@
 # Just check if the student has loaded the environment variables correctly
+# Test
 from helpers.config import Config
 
 
