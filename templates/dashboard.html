@@ -81,10 +81,37 @@
                 </div>
             </article>
             -->
-            
+            <article class="metric-card">
+                <div class="metric-card__icon">💸</div>
+                <div class="metric-card__content">
+                    <p class="metric-card__label">Largest Expense</p>
+                    <p class="metric-card__value">{{ report['Largest Expense'] }}</p>
+                    <p class="metric-card__value">
+                        {% if largest_expense %}
+                            R {{ "%.2f"|format(largest_expense.amount|abs) }}
+                        {% else %}
+                            No expenses yet
+                        {% endif %}
+                    </p>
+                </div>
+            </article>
+
             <!-- TODO: Add a new metric card for "Average Transaction" -->
             <!-- HINT: Display avg_transaction formatted as currency: R {{ "%.2f"|format(avg_transaction) }} -->
-            
+            <article class="metric-card">
+                <div class="metric-card__icon">💸</div>
+                <div class="metric-card__content">
+                    <p class="metric-card__label">Average Transaction </p>
+                    <p class="metric-card__value">{{ report['Average Transaction'] }} </p>
+                    <p class="metric-card__value">
+                        {% if avg_transaction %}
+                            R {{ "%.2f"|format(avg_transaction) }}
+                        {% else %}
+                            No transactions yet
+                        {% endif %}
+                    </p>
+                </div>
+            </article>
         </section>
 
         <!-- Charts Section -->

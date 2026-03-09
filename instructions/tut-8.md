@@ -15,11 +15,12 @@ You can still visit the customer dashboard by going to `http://localhost:5000/cu
 
 ---
 
-## What is a Template?
-A **template** is an HTML file with placeholders for data. Flask uses **Jinja2** to fill those placeholders at render time. The flow is:
+## What is a Template? ✓
+A **template** is an HTML file with placeholders for data. Flask uses **Jinja2** to fill those placeholders at render time. **Jinja2** allows us to put python code in html files. The flow is:
 1. Flask view prepares data (Python dicts, lists, objects).
 2. `render_template` sends that data into a `.html` template.
 3. Jinja2 swaps `{{ variables }}` and executes `{% logic %}` blocks to produce final HTML.
+
 
 You’ll commonly use:
 - `{{ variable }}` to output a value.
@@ -28,18 +29,18 @@ You’ll commonly use:
 
 ---
 
-### Step 1: Check Out the tut-8 Branch
+### Step 1: Check Out the tut-8 Branch ✓
 ```bash
 git checkout tut-8
 ```
 
-### Step 2: Open the Key Files
+### Step 2: Open the Key Files ✓
 - Backend view: `app.py` (the `dashboard()` function passes data to the template)
 - Frontend template: `templates/dashboard.html`
 
 ---
 
-### Step 3: Complete the Backend Metrics (app.py)
+### Step 3: Complete the Backend Metrics (app.py) ✓
 There is a TODO in `dashboard()` to calculate two metrics:
 
 1) **Largest Expense** (`largest_expense`)
@@ -54,7 +55,7 @@ Both variables are already passed to `render_template`; just compute them.
 
 ---
 
-### Step 4: Build the New Metric Cards (templates/dashboard.html)
+### Step 4: Build the New Metric Cards (templates/dashboard.html) ✓
 Find the TODO comments in the metrics section. Add two cards using the same structure/classes as the existing cards:
 This is **totally optional** and you will not be expected to know HTML / CSS for this course. The main point is to see how Jinja2 expressions work in a real template.
 
@@ -72,7 +73,7 @@ Keep the classes: `metric-card`, `metric-card__icon`, `metric-card__label`, `met
 
 ---
 
-### Step 5: Run the App and Verify
+### Step 5: Run the App and Verify ✓
 ```bash
 python app.py
 ```

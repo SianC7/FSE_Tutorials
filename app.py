@@ -32,7 +32,7 @@ def main():
 # FLASK APP
 
 @app.route("/")
-def dashboard():
+def dashboard(): # 9Function name must match the one used in url_for() in the template)
     """Main dashboard with Jinja2 template."""
     # Get all transactions
     transactions = get_all_transactions()
