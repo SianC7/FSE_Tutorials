@@ -1,5 +1,11 @@
 import os
-from celery import Celery
+import uuid
+from types import SimpleNamespace
+
+try:
+    from celery import Celery
+except ModuleNotFoundError:
+    Celery = None  # type: ignore[assignment]
 from loguru import logger
 from data.database import get_session
 from helpers.transactions import Transaction
@@ -7,16 +13,75 @@ from helpers.analysis import generate_financial_charts
 from helpers.config import Config
 import time
 
+
+class _FallbackTask:
+    """Minimal task wrapper used when Celery is not installed.
+
+    It supports direct calls, `.delay(...)`, and `.AsyncResult(task_id)`
+    so the Flask app and tests can import and execute task functions.
+    """
+
+    def __init__(self, func, name: str):
+        self._func = func
+        self.name = name
+        self._results = {}
+
+    def __call__(self, *args, **kwargs):
+        return self._func(*args, **kwargs)
+
+    def delay(self, *args, **kwargs):
+        task_id = str(uuid.uuid4())
+        try:
+            result = self._func(*args, **kwargs)
+            state = "SUCCESS"
+            info = None
+        except Exception as exc:
+            result = None
+            state = "FAILURE"
+            info = str(exc)
+        self._results[task_id] = {"state": state, "result": result, "info": info}
+        return SimpleNamespace(id=task_id)
+
+    def AsyncResult(self, task_id: str):
+        task_data = self._results.get(
+            task_id, {"state": "PENDING", "result": None, "info": None}
+        )
+        return SimpleNamespace(
+            state=task_data["state"], result=task_data["result"], info=task_data["info"]
+        )
+
+
+class _FallbackCelery:
+    """Tiny subset of Celery API needed by this project during tests."""
+
+    def __init__(self, *args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
+
+    def task(self, name=None):
+        def decorator(func):
+            return _FallbackTask(func, name or func.__name__)
+
+        return decorator
+
 # Configure logger for Celery workers to write to the same log file as Flask app
 logger.remove()
 logger.add("logs/app.log", format="{message}")
 
 # Initialize Celery app
-celery = Celery(
-    "fse_app",
-    broker=Config.get_celery_broker_url(),
-    backend=Config.get_celery_result_backend(),
-)
+if Celery is not None:
+    celery = Celery(
+        "fse_app",
+        broker=Config.get_celery_broker_url(),
+        backend=Config.get_celery_result_backend(),
+    )
+else:
+    logger.warning("Celery package not installed; running tasks in local fallback mode.")
+    celery = _FallbackCelery(
+        "fse_app",
+        broker=Config.get_celery_broker_url(),
+        backend=Config.get_celery_result_backend(),
+    )
 
 
 def charts_exist() -> bool:
@@ -61,7 +126,11 @@ def log_transaction_audit_task(transaction_id: int):
     """Celery task to log transaction audit information."""
     session = get_session()
     try:
-        pass
+        transaction = session.query(Transaction).filter_by(id=transaction_id).first()
+        if transaction:
+            log_transaction_audit(transaction)
+        else:
+            logger.error(f"Transaction with ID {transaction_id} not found for audit logging.")
     finally:
         session.close()
 

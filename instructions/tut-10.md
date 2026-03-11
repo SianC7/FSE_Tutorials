@@ -1,4 +1,4 @@
-# Tutorial 10: Interprocess Communication with Message Queues
+# Tutorial 10: Interprocess Communication with Message Queues 
 
 In this tutorial, you'll learn about interprocess communication (IPC) using message queues. Message queues allow different processes to communicate and synchronize their actions by sending and receiving messages asynchronously. Previously we created the financial charts every time a user requested the dashboard, which can be slow. Now, we'll offload chart generation to a background worker using a message queue, improving responsiveness. 
 
@@ -133,14 +133,14 @@ To run our application with multiple services (Flask app, Celery workers, Redis)
 
 1. **Install Docker Desktop**:
    - **Windows**: Download from [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
-   - **macOS**: Download from [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+   - **macOS**: Download from [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop) ✓
    - **Linux**: Install Docker Engine and Docker Compose:
      ```bash
      sudo apt-get update
      sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
      ```
 
-2. **Verify Installation**:
+2. **Verify Installation**: ✓
    ```bash
    docker --version
    docker-compose --version
@@ -148,12 +148,12 @@ To run our application with multiple services (Flask app, Celery workers, Redis)
 
 ### Project Setup
 
-1. **Navigate to Project Directory**:
+1. **Navigate to Project Directory**:✓
    ```bash
    cd FSE_Tutorials
    ```
 
-2. **Build and Start Services**:
+2. **Build and Start Services**:✓
    ```bash
    docker-compose up --build
    ```
@@ -163,23 +163,23 @@ To run our application with multiple services (Flask app, Celery workers, Redis)
    - Starts Redis, Flask app, Celery worker, and Celery beat
    - Shows logs from all services in your terminal
 
-3. **Run in Background (Detached Mode)**:
+3. **Run in Background (Detached Mode)**:✓
    ```bash
    docker-compose up -d
    ```
 
-4. **View Logs**:
+4. **View Logs**:✓
    ```bash
    docker-compose logs -f
    ```
 
-5. **Stop Services**:
+5. **Stop Services**:✓
    ```bash
    docker-compose down
    ```
 
-6. **Access the Application**:
-   - Open browser to `http://localhost:5000`
+6. **Access the Application**:✓
+   - Open browser to `http://127.0.0.1:5001`
    - The Flask app will connect to Redis automatically
 
 ---
@@ -213,8 +213,11 @@ The `log_transaction_audit_task` function is currently a placeholder. Your task 
 
 ### Requirements
 
-1. Open `tasks.py` and implement the `log_transaction_audit_task` function:
-2. Update `apps.py` to call this task after adding a transaction.
+1. Open `tasks.py` and implement the `log_transaction_audit_task` function:✓
+   - Retrieve the transaction details using the provided `transaction_id`
+   - Log the transaction information (ID, amount, type, timestamp) to `transaction_audit.log`
+   - Handle cases where the transaction ID is not found and log an appropriate error message
+2. Update `apps.py` to call this task after adding a transaction.✓
 
 There are `TODO` comments in `tasks.py` and `app.py` to guide you.
 

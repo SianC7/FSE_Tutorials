@@ -1,4 +1,4 @@
-
+# Tells docker how to build and run the multi-container application
 services:
   # Redis service for Celery message broker
   redis:
@@ -19,7 +19,7 @@ services:
     build: .
     container_name: fse_web
     ports:
-      - "5000:5000"
+      - "5001:5001"
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=True

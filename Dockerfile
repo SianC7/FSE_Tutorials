@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose Flask port
-EXPOSE 5000
+EXPOSE 5001
 
 # Default command runs Flask app on 0.0.0.0 (accessible from outside container)
 CMD ["python", "-u", "app.py"]
