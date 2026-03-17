@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: wealth-wise
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python -m data.seed
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CURRENCY_SYMBOL
+        value: R
+      - key: DATABASE_URL
+        value: sqlite:///data/finance.db
